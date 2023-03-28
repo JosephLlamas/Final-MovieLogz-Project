@@ -26,6 +26,7 @@ const Homepage = () => {
               <p>{items.title}</p>
               
               <img src={`https://image.tmdb.org/t/p/w500/${items.backdrop_path}`} alt={items.title} />
+              <img src={`https://image.tmdb.org/t/p/w500/${items.poster_path}`} alt={items.title} />
             </div>
           )
         })}
