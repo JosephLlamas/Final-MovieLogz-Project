@@ -5,6 +5,12 @@ const morgan = require('morgan');
 const router = require('./routes/routes')
 const PORT = 4000;
 
+
+
+
+
+
+
 express()
   .use(function(req, res, next) {
     res.header(
@@ -22,5 +28,7 @@ express()
   .use(express.urlencoded({ extended: false }))
   .use('/', express.static(__dirname + '/'))
   // .use(router)
+
+  //MOVIE ENDPOINTS///////////////////////
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`)); 
