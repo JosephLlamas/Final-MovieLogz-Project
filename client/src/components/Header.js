@@ -37,11 +37,11 @@ const Header = () => {
         </HomeLink>
       </Wrapper>
       <NavWrap>
-        <NavItem className="leftBorder" to={"/items/fitness"}>
+        <NavItem className="leftBorder" to={"/TopRated"}>
           TopRated
         </NavItem>
         <NavItem to={""}>Popular</NavItem>
-        <NavItem to={""}>BackLog</NavItem>
+        <NavItem to={"/backlog"}>BackLog</NavItem>
         <NavItem to={"/signin"}>Profile</NavItem>
         <ThemeProvider theme={theme}>
           <NavItem to="" theme={{ border: { cart: "none" } }}>

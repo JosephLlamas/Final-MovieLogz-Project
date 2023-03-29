@@ -19,7 +19,7 @@ const addUser =async(req,res) =>{
       const db = client.db("db-name");
       const result = await db.collection("users").findOne({email: userEmail });
     if (result === {email:userEmail}) {
-     return res.status(200).json({status:200, message:"This user exists"})
+    return res.status(200).json({status:200, message:"This user exists"})
 
     }else {
     const NewUser= Object.assign(
@@ -33,7 +33,6 @@ const addUser =async(req,res) =>{
   } catch (err) {
     return res.status(500).json({status:500, message:err.message});
   }
-
 
 };
 

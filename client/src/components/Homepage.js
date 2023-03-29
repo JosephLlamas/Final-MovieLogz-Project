@@ -5,21 +5,20 @@ import Pagination from "./Pagination";
 import styled from "styled-components";
 
 const Homepage = () => {
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 360 / 20;
   const itemsPerPage = 20;
 
   useEffect(() => {
-    
     fetch("/popularMovies")
-      .then(response => response.json())
+      .then((response) => response.json())
       .then((data) => {
         setData(data.data.results);
-        console.log(data)
+        console.log(data);
       })
-      .catch(err => console.error(err));
-  }, [])
+      .catch((err) => console.error(err));
+  }, []);
   //pagination
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -29,8 +28,8 @@ const Homepage = () => {
   const endIndex = startIndex + itemsPerPage;
   const itemsToShow = data.slice(startIndex, endIndex);
 
-    return (
-      <Wrapper>
+  return (
+    <Wrapper>
       <HomePageTextWrap>
         <HomePageText>All Items</HomePageText>
       </HomePageTextWrap>
@@ -39,16 +38,18 @@ const Homepage = () => {
       ) : (
         <GridWrap>
           <AllItemGrid>
-          {itemsToShow.map((items) => {
-          return (
-            <div key={items.id}>
-              <p>{items.title}</p>
-              
-              <img src={`https://image.tmdb.org/t/p/w500/${items.backdrop_path}`} alt={items.title} />
-              
-            </div>
-          )
-        })}
+            {itemsToShow.map((items) => {
+              return (
+                <div key={items.id}>
+                  <p>{items.title}</p>
+
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500/${items.backdrop_path}`}
+                    alt={items.title}
+                  />
+                </div>
+              );
+            })}
           </AllItemGrid>
         </GridWrap>
       )}
@@ -58,12 +59,10 @@ const Homepage = () => {
         onPageChange={handlePageChange}
       />
     </Wrapper>
-  
-    
-    );
+  );
 };
 
-export default Homepage; 
+export default Homepage;
 
 const Wrapper = styled.div`
   display: flex;
