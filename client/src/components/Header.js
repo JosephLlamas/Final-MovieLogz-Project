@@ -84,7 +84,7 @@ const NavWrap = styled.div`
   justify-content: center;
   border-bottom: 5px solid black;
   margin: 0px;
-  background-color: #caadd2;
+  background-color: red;
 `;
 
 const Wrapper = styled.div`
@@ -93,7 +93,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #b5d2ad;
+  background-color: orange;
 `;
 
 const CompanyName = styled.h1`

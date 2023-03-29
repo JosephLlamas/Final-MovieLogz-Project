@@ -68,7 +68,7 @@ export default Homepage;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #b5d2ad;
+  background-color: orange;
 `;
 const HomePageTextWrap = styled.div`
   display: flex;
