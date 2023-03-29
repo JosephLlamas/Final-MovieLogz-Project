@@ -5,6 +5,7 @@ const morgan = require("morgan");
 
 const { popularMovies } = require("./handlers/PopularMovies");
 const { TopRatedMovies } = require("./handlers/TopRatedMovies");
+const {addUser} = require("./handlers/addUser")
 
 const PORT = 4000;
 
@@ -29,6 +30,10 @@ express()
 ///MOVIE ENDPOINTS
 .get("/popularMovies", popularMovies)
 .get("/topRatedMovies", TopRatedMovies)
+
+//add User
+.post("/addUser", addUser)
+
 
 //Error message
 .get("*", (req, res) => {

@@ -2,7 +2,10 @@ import styled, { ThemeProvider } from "styled-components";
 import { Link } from "react-router-dom";
 import { BsMinecartLoaded } from "react-icons/bs";
 import React from "react";
+
+
 const Header = () => {
+ 
   const theme = {
     border: {
       cart: "none",
@@ -24,6 +27,8 @@ const Header = () => {
     },
   };
 
+ 
+
   return (
     <HeaderWrap>
       <Wrapper>
@@ -37,16 +42,23 @@ const Header = () => {
         </NavItem>
         <NavItem to={""}>Popular</NavItem>
         <NavItem to={""}>BackLog</NavItem>
-        <NavItem to={""}>Profile</NavItem>
+        <NavItem to={"/signin"}>Profile</NavItem>
         <ThemeProvider theme={theme}>
           <NavItem to="" theme={{ border: { cart: "none" } }}>
             <Cart />
           </NavItem>
         </ThemeProvider>
       </NavWrap>
+
+
+  
     </HeaderWrap>
+
+
   );
 };
+
+
 
 const HomeLink = styled(Link)`
   text-decoration: none;
