@@ -43,7 +43,7 @@ const Homepage = () => {
                 <div key={items.id}>
                   <p>{items.title}</p>
 
-                  <img
+                  <Img
                     src={`https://image.tmdb.org/t/p/w500/${items.backdrop_path}`}
                     alt={items.title}
                   />
@@ -64,10 +64,19 @@ const Homepage = () => {
 
 export default Homepage;
 
+
+
+const Img = styled.img`
+max-width: 100%;
+  height: auto;
+  border-radius: 20px;
+
+`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: orange;
+  
 `;
 const HomePageTextWrap = styled.div`
   display: flex;
