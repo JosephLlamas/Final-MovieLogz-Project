@@ -37,7 +37,7 @@ const Header = () => {
         </HomeLink>
       </Wrapper>
       <NavWrap>
-        <NavItem className="leftBorder" to={"/TopRated"}>
+        <NavItem className="leftBorder" to={"/topRated"}>
           TopRated
         </NavItem>
         <NavItem to={""}>Popular</NavItem>
@@ -45,7 +45,7 @@ const Header = () => {
         <NavItem to={"/signin"}>Profile</NavItem>
         <ThemeProvider theme={theme}>
           <NavItem to="" theme={{ border: { cart: "none" } }}>
-            <Cart />
+            Sign in
           </NavItem>
         </ThemeProvider>
       </NavWrap>

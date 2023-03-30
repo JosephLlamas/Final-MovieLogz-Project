@@ -31,7 +31,7 @@ const Homepage = () => {
   return (
     <Wrapper>
       <HomePageTextWrap>
-        <HomePageText>All Items</HomePageText>
+        <HomePageText>All Movies</HomePageText>
       </HomePageTextWrap>
       {data.length === 0 ? (
         <Loading />

@@ -4,14 +4,14 @@ import Loading from "./Loading";
 import Pagination from "./Pagination";
 import styled from "styled-components";
 
-const Homepage = () => {
+const toprated = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 360 / 20;
   const itemsPerPage = 20;
 
   useEffect(() => {
-    fetch("/popularMovies")
+    fetch("/topRatedMovies")
       .then((response) => response.json())
       .then((data) => {
         setData(data.data.results);
@@ -62,7 +62,7 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default toprated;
 
 const Wrapper = styled.div`
   display: flex;
@@ -98,3 +98,4 @@ const AllItemGrid = styled.div`
   gap: 2em;
   margin-left: 5em;
 `;
+
