@@ -40,7 +40,7 @@ const handleSubmit = (event) =>{
     if (data.status === 404){
      setError(data.error);
     }else{
-      localStorage.setItem("user",JSON.stringify(data.data));
+      localStorage.setItem("user",JSON.stringify(data.data._id));
       setCurrentUser(data.data);
       navigate("/");
     }
@@ -52,9 +52,9 @@ console.log(currentUser);
 };
 
   return (
-    <div>
-    <form onSubmit={(event)=> handleSubmit(event,user)}>
-    <input
+    <Wrapper>
+    <Form onSubmit={(event)=> handleSubmit(event,user)}>
+    <Input
               type="text"
               placeholder="First Name"
               label={"firstName"}
@@ -62,7 +62,7 @@ console.log(currentUser);
               required={true}
               onChange={(e) => setUser({ ...user, firstName: e.target.value })}
             />
-            <input
+            <Input
               type="text"
               placeholder="Last Name"
               label="lastName"
@@ -70,7 +70,7 @@ console.log(currentUser);
               required={true}
               onChange={(e) => setUser({ ...user, lastName: e.target.value })}
             />
-            <input
+            <Input
               type="email"
               placeholder="Email"
               label={"email"}
@@ -78,7 +78,7 @@ console.log(currentUser);
               required={true}
               onChange={(e) => setUser({ ...user, email: e.target.value })}
             />
-            <input
+            <Input
               type="password"
               placeholder="password"
               label={"password"}
@@ -86,7 +86,7 @@ console.log(currentUser);
               required={true}
               onChange={(e) => setUser({ ...user, password: e.target.value })}
             />
-            <input
+            <Input
               type="password"
               placeholder="comfirm password"
               label={"confirmPassword"}
@@ -95,11 +95,49 @@ console.log(currentUser);
                 setUser({ ...user, confirmPassword: e.target.value })
               }
             /> 
-      <button type="submit"> createUser</button>
+      <Button type="submit"> createUser</Button>
 
-    </form>
-    </div>
+    </Form>
+    </Wrapper>
   )
 }
 
 export default CreateUser;
+
+const Form =styled.form`
+   margin-top:50px;
+    background: orange;
+   border: 1px solid orange;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+   margin: 0 auto;
+   max-width: 500px;
+   padding: 30px 50px;
+
+`;
+
+const Wrapper = styled.div`
+    background: orange;
+    height: calc(100vh - 20px);
+ 
+`;
+const Button =styled.button`
+background-color: red;
+color: black;
+font-family: sans-serif;
+font-size: 20px;
+margin: 20px 0px;
+border-radius: 20px;
+
+`;
+
+const Input =styled.input`
+border: 1px solid #d9d9d9;
+   border-radius: 4px;
+   box-sizing: border-box;
+   padding: 10px;
+   width: 100%;
+   margin-bottom: 10px;
+
+`;
