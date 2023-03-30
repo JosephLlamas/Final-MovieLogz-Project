@@ -1,11 +1,25 @@
 import styled, { ThemeProvider } from "styled-components";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { BsMinecartLoaded } from "react-icons/bs";
+import { UserContext } from "./UserContext";
+import {  useContext } from "react";
+
 import React from "react";
 
 
 const Header = () => {
- 
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
+  const handleChange = () => {
+    setCurrentUser(null);
+    localStorage.removeItem("user");
+    navigate("/signin");
+  };
+
+
+
   const theme = {
     border: {
       cart: "none",
@@ -28,7 +42,7 @@ const Header = () => {
   };
 
  
-
+console.log(currentUser)
   return (
     <HeaderWrap>
       <Wrapper>
@@ -40,18 +54,24 @@ const Header = () => {
         <NavItem className="leftBorder" to={"/topRated"}>
           TopRated
         </NavItem>
-        <NavItem to={""}>Popular</NavItem>
+        <NavItem to={"/"}>Popular</NavItem>
         <NavItem to={"/backlog"}>BackLog</NavItem>
+        {!currentUser?(
         <NavItem to={"/signin"}>Profile</NavItem>
+        ) :(
+            <p>{currentUser.firstName}</p>
+        )
+      }
+      {currentUser? ( <p onClick={handleChange}>sign out</p>):(
+
         <ThemeProvider theme={theme}>
-          <NavItem to="" theme={{ border: { cart: "none" } }}>
+          <NavItem to="/createUser" theme={{ border: { cart: "none" } }}>
             Sign in
           </NavItem>
         </ThemeProvider>
+
+      )}
       </NavWrap>
-
-
-  
     </HeaderWrap>
 
 

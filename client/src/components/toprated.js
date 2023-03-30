@@ -43,7 +43,7 @@ const toprated = () => {
                 <div key={items.id}>
                   <p>{items.title}</p>
 
-                  <img
+                  <Img
                     src={`https://image.tmdb.org/t/p/w500/${items.backdrop_path}`}
                     alt={items.title}
                   />
@@ -63,6 +63,13 @@ const toprated = () => {
 };
 
 export default toprated;
+
+const Img = styled.img`
+max-width: 100%;
+  height: auto;
+  border-radius: 20px;
+
+`;
 
 const Wrapper = styled.div`
   display: flex;

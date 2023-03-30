@@ -3,13 +3,17 @@ import React from "react";
 import Loading from "./Loading";
 import Pagination from "./Pagination";
 import styled from "styled-components";
+import {useNavigate} from "react-router-dom";
+import WatchlistButton from "../components/WishListButton";
+
 
 const Homepage = () => {
+
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 360 / 20;
   const itemsPerPage = 20;
-
+const navigate =useNavigate();
   useEffect(() => {
     fetch("/popularMovies")
       .then((response) => response.json())
@@ -40,13 +44,23 @@ const Homepage = () => {
           <AllItemGrid>
             {itemsToShow.map((items) => {
               return (
-                <div key={items.id}>
+                <div>
+                <div key={items.id}
+                onClick={(event)=>{
+                event.stopPropagation();
+                navigate(`/movie/${items.id}`);
+                }}
+                >
                   <p>{items.title}</p>
 
                   <Img
                     src={`https://image.tmdb.org/t/p/w500/${items.backdrop_path}`}
                     alt={items.title}
                   />
+                  
+                </div>
+       
+                <WatchlistButton item={items}/>
                 </div>
               );
             })}

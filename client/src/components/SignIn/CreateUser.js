@@ -48,7 +48,7 @@ const handleSubmit = (event) =>{
 .catch((error)=>{
 alert(error);
 });
-console.log(currentUser);
+
 };
 
   return (

@@ -5,7 +5,9 @@ const morgan = require("morgan");
 
 const { popularMovies } = require("./handlers/PopularMovies");
 const { TopRatedMovies } = require("./handlers/TopRatedMovies");
-const {createUser} = require("./handlers/MongoHandlers")
+const {createUser,signin} = require("./handlers/MongoHandlers")
+const { getMovieById } = require("./handlers/movieById");
+const { addToWatchList } = require("./handlers/WishlistButton");
 
 const PORT = 4000;
 
@@ -30,9 +32,14 @@ express()
 ///MOVIE ENDPOINTS
 .get("/popularMovies", popularMovies)
 .get("/topRatedMovies", TopRatedMovies)
+.get("/movieById/:movieId", getMovieById)
 
 //add User
 .post("/addUser", createUser)
+.get("/signIn/:email/:password", signin)
+
+
+.post("/watchlist", addToWatchList)
 
 
 //Error message
