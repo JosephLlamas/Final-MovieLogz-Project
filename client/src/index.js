@@ -1,15 +1,14 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import App from "./App";
+import { UserProvider } from "./components/UserContext";
 
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  
-  
-    <React.StrictMode>
+ReactDOM.render(
+  <React.StrictMode>
+    <UserProvider value={{}}>
       <App />
-    </React.StrictMode>
-  
-);
-
+    </UserProvider>
+    ,
+  </React.StrictMode>,
+  document.getElementById("root")
+); 

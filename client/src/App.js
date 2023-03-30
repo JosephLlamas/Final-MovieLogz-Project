@@ -5,6 +5,7 @@ import Homepage from "./components/Homepage";
 import Signin from "./components/SignIn/Signin";
 import Header from "./components/Header";
 import TopRated from "./components/toprated";
+import CreateUser from "./components/SignIn/CreateUser";
 
 const App = () => {
   
@@ -18,7 +19,7 @@ const App = () => {
           <Route path="/" element={ <Homepage />} />
           <Route path="/signin" element={ <Signin />} />
           <Route path="/toprated" element={ <TopRated/>} />
-
+          <Route path="/createUser" element={ <CreateUser/>} />
         </Routes>
 
       </BrowserRouter>

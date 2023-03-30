@@ -5,7 +5,7 @@ const morgan = require("morgan");
 
 const { popularMovies } = require("./handlers/PopularMovies");
 const { TopRatedMovies } = require("./handlers/TopRatedMovies");
-const {addUser} = require("./handlers/addUser")
+const {createUser} = require("./handlers/MongoHandlers")
 
 const PORT = 4000;
 
@@ -32,7 +32,7 @@ express()
 .get("/topRatedMovies", TopRatedMovies)
 
 //add User
-.post("/addUser", addUser)
+.post("/addUser", createUser)
 
 
 //Error message
