@@ -1,4 +1,3 @@
-
 const request = require("request-promise");
 require("dotenv").config();
 // const { MOVIE_API } = process.env;
@@ -6,12 +5,12 @@ const movieAPI = process.env.MOVIE_API;
 
 //GET ALL PopulaMovies
 
-const popularMovies = async (req, res) => {
+const TopRatedMovies = async (req, res) => {
   page = req.query.page || 1;
   const options = {
     method: "GET",
     uri: 
-    `https://api.themoviedb.org/3/movie/popular?api_key=${movieAPI}&language=en-US&page=${page}`
+    `https://api.themoviedb.org/3/movie/top_rated?api_key=${movieAPI}&language=en-US&page=${page}`
     ,
     headers: {
         Accept: "application/json",
@@ -35,5 +34,4 @@ const popularMovies = async (req, res) => {
   }
 };
 
-module.exports = { popularMovies };
-
+module.exports = { TopRatedMovies };

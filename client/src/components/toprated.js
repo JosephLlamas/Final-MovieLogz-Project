@@ -3,19 +3,15 @@ import React from "react";
 import Loading from "./Loading";
 import Pagination from "./Pagination";
 import styled from "styled-components";
-import {useNavigate} from "react-router-dom";
-import WatchlistButton from "../components/WishListButton";
 
-
-const Homepage = () => {
-
+const toprated = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 360 / 20;
   const itemsPerPage = 20;
-const navigate =useNavigate();
+
   useEffect(() => {
-    fetch("/popularMovies")
+    fetch("/topRatedMovies")
       .then((response) => response.json())
       .then((data) => {
         setData(data.data.results);
@@ -35,7 +31,7 @@ const navigate =useNavigate();
   return (
     <Wrapper>
       <HomePageTextWrap>
-        <HomePageText>All Movies</HomePageText>
+        <HomePageText>All Items</HomePageText>
       </HomePageTextWrap>
       {data.length === 0 ? (
         <Loading />
@@ -44,23 +40,13 @@ const navigate =useNavigate();
           <AllItemGrid>
             {itemsToShow.map((items) => {
               return (
-                <div>
-                <div key={items.id}
-                onClick={(event)=>{
-                event.stopPropagation();
-                navigate(`/movie/${items.id}`);
-                }}
-                >
+                <div key={items.id}>
                   <p>{items.title}</p>
 
                   <Img
                     src={`https://image.tmdb.org/t/p/w500/${items.backdrop_path}`}
                     alt={items.title}
                   />
-                  
-                </div>
-       
-                <WatchlistButton item={items}/>
                 </div>
               );
             })}
@@ -76,9 +62,7 @@ const navigate =useNavigate();
   );
 };
 
-export default Homepage;
-
-
+export default toprated;
 
 const Img = styled.img`
 max-width: 100%;
@@ -86,11 +70,11 @@ max-width: 100%;
   border-radius: 20px;
 
 `;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: orange;
-  
 `;
 const HomePageTextWrap = styled.div`
   display: flex;
@@ -121,3 +105,4 @@ const AllItemGrid = styled.div`
   gap: 2em;
   margin-left: 5em;
 `;
+
