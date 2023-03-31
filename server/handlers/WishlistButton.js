@@ -19,7 +19,7 @@ const addToWatchList = async(req,res) =>{
   try{
     await client.connect();
     const db =client.db("db-name");
-    await db.collection("users").updateOne({_id: watchlist.userId}, {$set:{watchlist:watchlist.watchlistArr}})
+    await db.collection("users").updateOne({_id: watchlist.userId}, {$push:{watchlist:watchlist.watchlistArr}})
     return res.status(200).json({status:200});
 
   }catch (err) {
