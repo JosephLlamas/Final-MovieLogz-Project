@@ -90,27 +90,39 @@ const signin = async (req, res) => {
   }
 }; 
 
-// Get all the Watchlist movies
-const getAllWishlist = async (request, response) => {
-  const client = new MongoClient(MONGO_URI, options);
+
+//Delete movie ID from watchlist
+const deleteMovie =async (req,res) =>{
+  const client = new MongoClient(MONGO_URI, options)
+  const userId = req.body.userId
+  const watchlistId = Number(req.params.id)
+  console.log(typeof watchlistId)
   try {
-    await client.connect();
-
-    const db = client.db("db-name");
-
-    const itemsCollection = db.collection("users");
-
-    const items = await itemsCollection.find({watchlist: [watchlist.id]}).toArray();
-
-    response.status(200).json({ status: 200, data: { items } });
+      await client.connect()
+      const db = client.db("db-name")
+      const reservation = await db.collection("users").findOne({ _id: userId, "watchlist": {"$elemMatch": {id: watchlistId} }});
+      // const reservation = await db.collection("users").findOne({_id: "2c84613e-23b1-4a16-bd04-e2954c0fb556", "watchlist.id": watchlistId});
+      // console.log(reservation, "i am here")
+    if (!reservation) {
+      return res
+        .status(404)
+        .json({ status: 404, message: "Watchlist Item not found" });
+    }
+      //deletes from watchlist here 
+      const deleted = await db.collection('users').updateOne({ _id: userId, "watchlist": {"$elemMatch": {id: watchlistId} }}, {$pull: {"watchlist": {id: watchlistId}}})
+      if(deleted.modifiedCount > 0 ){
+          const updatePage = await db.collection("users").findOne({_id: userId})
+          return res.status(200).json({status: 200, message : "item successfully deleted", data: updatePage})
+      }
   } catch (error) {
-    console.error(error);
-    response.status(400).json({ status: 400, message: "Error, bad request" });
-  } finally {
-    client.close();
+      return res.status(404).json({status:404,error : error.message})
+  }finally{
+      client.close()
   }
 };
-//Delete movie ID from watchlist
+
+ 
 
 
-module.exports = { createUser, signin, getAllWishlist };
+
+module.exports = { createUser, signin,  deleteMovie};
