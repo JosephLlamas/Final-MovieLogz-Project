@@ -1,4 +1,4 @@
-
+import { AiTwotoneFire } from "react-icons/ai";
 import React from "react";
 import {useState, useContext} from "react";
 import styled from "styled-components";
@@ -37,9 +37,9 @@ console.log(currentUser)
 
   return (
     <div>
-      <button onClick={() => handleClick(currentUser._id, item)}>
-        Add To Watchlist
-      </button>
+      <AiTwotoneFire onClick={() => handleClick(currentUser._id, item)}>
+        Add To Watchlist/backlog
+      </AiTwotoneFire>
       {message !== null ? <p>{message} </p> : null}
     </div>
   );

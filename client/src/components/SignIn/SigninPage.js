@@ -58,7 +58,7 @@ const SigninPage = () => {
           required={true}
           onChange={(e) => setSignIn({...signIn, password: e.target.value})}
         />
-        <Button type="submit">Sign In</Button>
+        <Button type="submit">Sign in</Button>
 
      
       </Form>

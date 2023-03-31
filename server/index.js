@@ -6,7 +6,7 @@ const morgan = require("morgan");
 const { popularMovies } = require("./handlers/PopularMovies");
 const { TopRatedMovies } = require("./handlers/TopRatedMovies");
 const {createUser,signin} = require("./handlers/MongoHandlers")
-const { getMovieById } = require("./handlers/movieById");
+const { getMovieById } = require("./handlers/MoviebyId");
 const { addToWatchList } = require("./handlers/WishlistButton");
 
 const PORT = 4000;

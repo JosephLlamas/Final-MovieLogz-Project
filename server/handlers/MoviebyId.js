@@ -3,7 +3,7 @@ require("dotenv").config();
 // const { MOVIE_API } = process.env;
 const movieAPI = process.env.MOVIE_API;
 
-//GET MOVIE BY ID
+//GET MOVIE
 
 const getMovieById = async (req, res) => {
   const {movieId} = req.params;

@@ -3,7 +3,9 @@ import { Link,useNavigate } from "react-router-dom";
 import { BsMinecartLoaded } from "react-icons/bs";
 import { UserContext } from "./UserContext";
 import {  useContext } from "react";
-
+import {GoSignOut} from "react-icons/go";
+import { BsFillEmojiSunglassesFill } from "react-icons/bs";
+import { IconName } from "react-icons/bs";
 import React from "react";
 
 
@@ -62,11 +64,11 @@ console.log(currentUser)
             <NavItem>{currentUser.firstName}</NavItem>
         )
       }
-      {currentUser? ( <NavItem onClick={handleChange}>sign out</NavItem>):(
+      {currentUser? ( <NavItem onClick={handleChange}><GoSignOut/></NavItem>):(
 
         <ThemeProvider theme={theme}>
           <NavItem to="/createUser" theme={{ border: { cart: "none" } }}>
-            Sign in
+          <BsFillEmojiSunglassesFill/> Sign In
           </NavItem>
         </ThemeProvider>
 
