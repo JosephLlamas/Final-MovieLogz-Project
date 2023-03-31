@@ -1,14 +1,27 @@
 import React from 'react'
 import {UserContext} from "./UserContext"
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect,useState } from 'react';
 import { Link,useParams } from "react-router-dom";
 
 
 
 function Backlog() {
   const {currentUser, setCurrentUser } = useContext(UserContext);
-  
+  const [data, setData] = useState([]);
+ const [refresh,setRefresh] = useState();
   // const {id} = useParams()
+  
+
+  useEffect(() => {
+    fetch(`/viewWatchlist/${currentUser._id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data.data.watchlist);
+        console.log(data);
+      })
+      .catch((err) => console.error(err));
+  }, [refresh]);
+
 
   const handleClickButtonDelete = (id) => {
     // alert(id)
@@ -25,15 +38,14 @@ function Backlog() {
     }).then((result) => result.json())
     .then((data) => {
       console.log(data)
-      setCurrentUser(data.data)
+      setRefresh(data.data)
     })
 }
-
 
   return (
     <div>
       {currentUser.watchlist.length === 0 ? (
-        <h2>Looks like your watchlist is empty, Click <Link to={'/'}>here</Link> if you would like to keep shoppping ! </h2>
+        <h2>EMPTY Click <Link to={'/'}>here</Link> </h2>
       ) : (
         <>
           {currentUser.watchlist.map((item) => {

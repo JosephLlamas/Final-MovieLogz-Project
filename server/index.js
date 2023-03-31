@@ -5,7 +5,7 @@ const morgan = require("morgan");
 
 const { popularMovies } = require("./handlers/PopularMovies");
 const { TopRatedMovies } = require("./handlers/TopRatedMovies");
-const {createUser,signin,deleteMovie} = require("./handlers/MongoHandlers")
+const {createUser,signin,deleteMovie,viewMovies} = require("./handlers/MongoHandlers")
 const { getMovieById } = require("./handlers/MoviebyId");
 const { addToWatchList } = require("./handlers/WishlistButton");
 
@@ -43,6 +43,8 @@ express()
 //delete Movie ID from watchlist
 .delete("/deleteMovie/:id", deleteMovie)
 
+// get movie watchlists
+.get("/viewWatchlist/:userId", viewMovies)
 
 //Error message
 .get("*", (req, res) => {

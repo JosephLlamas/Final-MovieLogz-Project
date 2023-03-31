@@ -9,19 +9,21 @@ import WatchlistButton from "../components/WishListButton";
 const toprated = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 360 / 20;
+  // const totalPages = 360 / 20;
+  const [totalPages, setTotalPages] = useState(0);
   const itemsPerPage = 20;
   const navigate =useNavigate();
 
   useEffect(() => {
-    fetch("/topRatedMovies")
+    fetch(`/topRatedMovies?page=${currentPage}`)
       .then((response) => response.json())
       .then((data) => {
         setData(data.data.results);
+        setTotalPages(Math.min(Math.ceil(data.data.total_results / itemsPerPage), 20));
         console.log(data);
       })
       .catch((err) => console.error(err));
-  }, []);
+  }, [currentPage]);
 
   //pagination
   const handlePageChange = (pageNumber) => {
@@ -31,7 +33,7 @@ const toprated = () => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const itemsToShow = data.slice(startIndex, endIndex);
-
+  console.log(itemsToShow);
   return (
     <Wrapper>
       <HomePageTextWrap>
@@ -42,7 +44,7 @@ const toprated = () => {
       ) : (
         <GridWrap>
           <AllItemGrid>
-            {itemsToShow.map((items) => {
+            {data.map((items) => {
               return (
                 <div>
                 <div key={items.id}

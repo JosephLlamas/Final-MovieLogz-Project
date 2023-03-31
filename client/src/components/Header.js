@@ -61,7 +61,7 @@ console.log(currentUser)
         {!currentUser?(
         <NavItem to={"/signin"}>Profile</NavItem>
         ) :(
-            <NavItem>{currentUser.firstName}</NavItem>
+            <NavItem to={"/profile"}>{currentUser.firstName}</NavItem>
         )
       }
       {currentUser? ( <NavItem onClick={handleChange}><GoSignOut/></NavItem>):(

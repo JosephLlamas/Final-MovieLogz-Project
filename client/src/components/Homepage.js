@@ -36,7 +36,8 @@ const navigate =useNavigate();
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const itemsToShow = data.slice(startIndex, endIndex);
-console.log(itemsToShow);
+  
+// console.log(itemsToShow);
   return (
     <Wrapper>
       <HomePageTextWrap>
@@ -47,7 +48,7 @@ console.log(itemsToShow);
       ) : (
         <GridWrap>
           <AllItemGrid>
-            {itemsToShow.map((items) => {
+            {data.map((items) => {
               return (
                 <div>
                 <div key={items.id}

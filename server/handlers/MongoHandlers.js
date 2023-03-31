@@ -121,8 +121,27 @@ const deleteMovie =async (req,res) =>{
   }
 };
 
- 
+ //get all movies from watchlist 
+ const  viewMovies = async (req,res) =>{
+  const userId =req.params.userId 
+  const client = new MongoClient(MONGO_URI,options);
+
+  try{
+    await client.connect();
+    const db = client.db("db-name");
+    const result= await db.collection("users").findOne({_id: userId});
+    res.status(200).json({status:200, data:result});
+  }catch (err){
+    console.log(err.stack);
+    res.status(404).json({status:400, message:"data not found!"});
+
+  } finally {
+    client.close();
+  }
+
+
+ };
 
 
 
-module.exports = { createUser, signin,  deleteMovie};
+module.exports = { createUser, signin,  deleteMovie,viewMovies};

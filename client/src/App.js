@@ -9,6 +9,7 @@ import CreateUser from "./components/SignIn/CreateUser";
 import SpecificMovie from"./components/SpecificMovie";
 import {GlobalStyle} from "./components/GlobalStyles";
 import Backlog from "./components/Backlog";
+import Profile from "./components/Profile";
 const App = () => {
   
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/createUser" element={ <CreateUser/>} />
           <Route path="/movie/:movieId" element={<SpecificMovie />} /> 
           <Route path="/backlog" element={ <Backlog/>} />
+          <Route path="/Profile" element={ <Profile/>} />
         </Routes>
 
       </BrowserRouter>

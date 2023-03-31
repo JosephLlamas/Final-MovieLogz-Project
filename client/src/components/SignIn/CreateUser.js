@@ -40,7 +40,7 @@ const handleSubmit = (event) =>{
     if (data.status === 404){
      setError(data.error);
     }else{
-      localStorage.setItem("user",JSON.stringify(data.data._id));
+      localStorage.setItem("user",JSON.stringify(data.data));
       setCurrentUser(data.data);
       navigate("/");
     }
