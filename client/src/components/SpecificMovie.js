@@ -57,6 +57,7 @@ margin-top:20px;
 const Title = styled.p`
   margin: 0 0 10px 0;
   font-weight: bold;
+  font-size: 60px;
 `;
 
 

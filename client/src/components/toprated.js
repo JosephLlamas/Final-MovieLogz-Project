@@ -3,12 +3,15 @@ import React from "react";
 import Loading from "./Loading";
 import Pagination from "./Pagination";
 import styled from "styled-components";
+import {useNavigate} from "react-router-dom";
+import WatchlistButton from "../components/WishListButton";
 
 const toprated = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 360 / 20;
   const itemsPerPage = 20;
+  const navigate =useNavigate();
 
   useEffect(() => {
     fetch("/topRatedMovies")
@@ -19,6 +22,7 @@ const toprated = () => {
       })
       .catch((err) => console.error(err));
   }, []);
+
   //pagination
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -31,7 +35,7 @@ const toprated = () => {
   return (
     <Wrapper>
       <HomePageTextWrap>
-        <HomePageText>All Items</HomePageText>
+        <HomePageText>MAYBE SEARCH BAR FOR MOVIES??INSERT</HomePageText>
       </HomePageTextWrap>
       {data.length === 0 ? (
         <Loading />
@@ -40,13 +44,22 @@ const toprated = () => {
           <AllItemGrid>
             {itemsToShow.map((items) => {
               return (
-                <div key={items.id}>
+                <div>
+                <div key={items.id}
+                onClick={(event)=>{
+                  event.stopPropagation();
+                  navigate(`/movie/${items.id}`);
+                  }}
+                >
+
                   <p>{items.title}</p>
 
                   <Img
                     src={`https://image.tmdb.org/t/p/w500/${items.backdrop_path}`}
                     alt={items.title}
                   />
+                </div>
+                <WatchlistButton item={items}/>
                 </div>
               );
             })}

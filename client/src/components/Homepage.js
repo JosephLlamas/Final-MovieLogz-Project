@@ -14,6 +14,7 @@ const Homepage = () => {
   const totalPages = 360 / 20;
   const itemsPerPage = 20;
 const navigate =useNavigate();
+
   useEffect(() => {
     fetch("/popularMovies")
       .then((response) => response.json())
@@ -35,7 +36,7 @@ const navigate =useNavigate();
   return (
     <Wrapper>
       <HomePageTextWrap>
-        <HomePageText>MAYBE SEARCH BAR FOR MOVIES??</HomePageText>
+        <HomePageText>MAYBE SEARCH BAR FOR MOVIES??INSERT </HomePageText>
       </HomePageTextWrap>
       {data.length === 0 ? (
         <Loading />
