@@ -90,4 +90,27 @@ const signin = async (req, res) => {
   }
 }; 
 
-module.exports = { createUser, signin };
+// Get all the Watchlist movies
+const getAllWishlist = async (request, response) => {
+  const client = new MongoClient(MONGO_URI, options);
+  try {
+    await client.connect();
+
+    const db = client.db("db-name");
+
+    const itemsCollection = db.collection("users");
+
+    const items = await itemsCollection.find({watchlist: [watchlist.id]}).toArray();
+
+    response.status(200).json({ status: 200, data: { items } });
+  } catch (error) {
+    console.error(error);
+    response.status(400).json({ status: 400, message: "Error, bad request" });
+  } finally {
+    client.close();
+  }
+};
+//Delete movie ID from watchlist
+
+
+module.exports = { createUser, signin, getAllWishlist };

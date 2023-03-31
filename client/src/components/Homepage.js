@@ -11,19 +11,23 @@ const Homepage = () => {
 
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 360 / 20;
+  // const totalPages = 360 / 20;
+  // const totalPages = data.total_pages;
+  const [totalPages, setTotalPages] = useState(0);
   const itemsPerPage = 20;
 const navigate =useNavigate();
 
   useEffect(() => {
-    fetch("/popularMovies")
+    fetch(`/popularMovies?page=${currentPage}`)
       .then((response) => response.json())
       .then((data) => {
         setData(data.data.results);
+        setTotalPages(Math.min(Math.ceil(data.data.total_results / itemsPerPage), 20));
+        // setTotalPages(data.total_pages);
         console.log(data);
       })
       .catch((err) => console.error(err));
-  }, []);
+  }, [currentPage]);
   //pagination
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -32,7 +36,7 @@ const navigate =useNavigate();
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const itemsToShow = data.slice(startIndex, endIndex);
-
+console.log(itemsToShow);
   return (
     <Wrapper>
       <HomePageTextWrap>
@@ -68,11 +72,13 @@ const navigate =useNavigate();
           </AllItemGrid>
         </GridWrap>
       )}
+      
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={handlePageChange}
       />
+      
     </Wrapper>
   );
 };
