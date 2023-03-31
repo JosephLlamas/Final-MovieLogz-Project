@@ -3,7 +3,7 @@ require("dotenv").config();
 // const { MOVIE_API } = process.env;
 const movieAPI = process.env.MOVIE_API;
 
-
+//GET MOVIE BY ID
 
 const getMovieById = async (req, res) => {
   const {movieId} = req.params;
@@ -30,6 +30,10 @@ const getMovieById = async (req, res) => {
     });
   }
 }; 
+
+//DELETE MOVIE BY ID
+
+
 
 
 module.exports = { getMovieById };

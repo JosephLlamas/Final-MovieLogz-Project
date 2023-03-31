@@ -35,7 +35,7 @@ const navigate =useNavigate();
   return (
     <Wrapper>
       <HomePageTextWrap>
-        <HomePageText>All Movies</HomePageText>
+        <HomePageText>MAYBE SEARCH BAR FOR MOVIES??</HomePageText>
       </HomePageTextWrap>
       {data.length === 0 ? (
         <Loading />

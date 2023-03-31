@@ -59,10 +59,10 @@ console.log(currentUser)
         {!currentUser?(
         <NavItem to={"/signin"}>Profile</NavItem>
         ) :(
-            <p>{currentUser.firstName}</p>
+            <NavItem>{currentUser.firstName}</NavItem>
         )
       }
-      {currentUser? ( <p onClick={handleChange}>sign out</p>):(
+      {currentUser? ( <NavItem onClick={handleChange}>sign out</NavItem>):(
 
         <ThemeProvider theme={theme}>
           <NavItem to="/createUser" theme={{ border: { cart: "none" } }}>
