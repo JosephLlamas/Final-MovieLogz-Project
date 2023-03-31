@@ -60,7 +60,10 @@ const SigninPage = () => {
         />
         <Button type="submit">Sign In</Button>
 
-      <Extra>
+     
+      </Form>
+      
+<Extra>
         {errorMessage !== undefined ? (
         <p style={{color: "red"}}>{errorMessage}</p>
       ) : null}
@@ -69,14 +72,6 @@ const SigninPage = () => {
         <p>Create Account</p>
       </Link>
      </Extra>
-      </Form>
-      {/* {errorMessage !== undefined ? (
-        <p style={{color: "red"}}>{errorMessage}</p>
-      ) : null}
-      <p>If you have no account click here</p>
-      <Link to="/createuser">
-        <p>Create Account</p>
-      </Link> */}
     </Wrapper>
   );
 };
