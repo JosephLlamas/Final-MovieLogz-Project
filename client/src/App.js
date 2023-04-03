@@ -10,6 +10,7 @@ import SpecificMovie from"./components/SpecificMovie";
 import {GlobalStyle} from "./components/GlobalStyles";
 import Backlog from "./components/Backlog";
 import Profile from "./components/Profile";
+import Nowplaying from "./components/nowPlaying";
 const App = () => {
   
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/" element={ <Homepage />} />
           <Route path="/signin" element={ <SigninPage/>} />
           <Route path="/toprated" element={ <TopRated/>} />
+          <Route path="/nowplaying" element={ <Nowplaying/>} />
           <Route path="/createUser" element={ <CreateUser/>} />
           <Route path="/movie/:movieId" element={<SpecificMovie />} /> 
           <Route path="/backlog" element={ <Backlog/>} />

@@ -56,7 +56,7 @@ const Header = () => {
         <NavItem className="leftBorder" to={"/topRated"}>
           TopRated
         </NavItem>
-        <NavItem to={"/"}>Popular</NavItem>
+        <NavItem to={"/nowPlaying"}>Now Playing</NavItem>
         <NavItem to={"/backlog"}>BackLog</NavItem>
         {!currentUser?(
         <NavItem to={"/signin"}>Profile</NavItem>

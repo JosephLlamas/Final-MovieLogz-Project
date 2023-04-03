@@ -5,6 +5,7 @@ const morgan = require("morgan");
 
 const { popularMovies } = require("./handlers/PopularMovies");
 const { TopRatedMovies } = require("./handlers/TopRatedMovies");
+const { NowPlaying } = require("./handlers/NowPlaying");
 const {createUser,signin,deleteMovie,viewMovies,addComment,deleteComment,viewComments} = require("./handlers/MongoHandlers")
 const { getMovieById } = require("./handlers/MoviebyId");
 const { addToWatchList } = require("./handlers/WishlistButton");
@@ -33,7 +34,7 @@ express()
 .get("/popularMovies", popularMovies)
 .get("/topRatedMovies", TopRatedMovies)
 .get("/movieById/:movieId", getMovieById)
-
+.get("/NowPlayingMovies", NowPlaying)
 //add User
 .post("/addUser", createUser)
 .get("/signIn/:email/:password", signin)
