@@ -38,7 +38,7 @@ express()
 .post("/addUser", createUser)
 .get("/signIn/:email/:password", signin)
 
-
+//adding to watchlist
 .post("/watchlist", addToWatchList)
 //delete Movie ID from watchlist
 .delete("/deleteMovie/:id", deleteMovie)

@@ -95,21 +95,27 @@ const signin = async (req, res) => {
 const deleteMovie =async (req,res) =>{
   const client = new MongoClient(MONGO_URI, options)
   const userId = req.body.userId
+  // console.log(userId)
   const watchlistId = Number(req.params.id)
-  console.log(typeof watchlistId)
+  console.log(watchlistId)
+  // console.log(typeof watchlistId)
+
   try {
       await client.connect()
       const db = client.db("db-name")
-      const reservation = await db.collection("users").findOne({ _id: userId, "watchlist": {"$elemMatch": {id: watchlistId} }});
-      // const reservation = await db.collection("users").findOne({_id: "2c84613e-23b1-4a16-bd04-e2954c0fb556", "watchlist.id": watchlistId});
-      // console.log(reservation, "i am here")
-    if (!reservation) {
+      const results = await db.collection("users").findOne({ _id: userId, watchlist: {$elemMatch: {id: watchlistId} }});
+      // const reservation = await db.collection("users").findOne({_id: "INSERT _ID", "watchlist.id": watchlistId});
+      console.log(results, "PLEASE HELP")
+    if (!results) {
       return res
         .status(404)
         .json({ status: 404, message: "Watchlist Item not found" });
     }
+
+
       //deletes from watchlist here 
-      const deleted = await db.collection('users').updateOne({ _id: userId, "watchlist": {"$elemMatch": {id: watchlistId} }}, {$pull: {"watchlist": {id: watchlistId}}})
+      const deleted = await db.collection('users').updateOne({ _id: userId}, {$pull: {watchlist: {id: watchlistId}}})
+
       if(deleted.modifiedCount > 0 ){
           const updatePage = await db.collection("users").findOne({_id: userId})
           return res.status(200).json({status: 200, message : "item successfully deleted", data: updatePage})
@@ -121,15 +127,19 @@ const deleteMovie =async (req,res) =>{
   }
 };
 
+
+
+
  //get all movies from watchlist 
- const  viewMovies = async (req,res) =>{
+  const  viewMovies = async (req,res) =>{
   const userId =req.params.userId 
   const client = new MongoClient(MONGO_URI,options);
-
+// console.log(userId)
   try{
     await client.connect();
     const db = client.db("db-name");
     const result= await db.collection("users").findOne({_id: userId});
+    // console.log(result)
     res.status(200).json({status:200, data:result});
   }catch (err){
     console.log(err.stack);
@@ -139,9 +149,31 @@ const deleteMovie =async (req,res) =>{
     client.close();
   }
 
+};
+//add comment 
+const addComment =async(req, res) =>{
+  const client =new MongoClient(MONGO_URI,options);
+  const comment = {
+    userId: req.body.userId,
+    comment: req.body.comment,
+  };
+try{
+  await client.connect();
+  const db=client.db("db-name");
+  await db.collection("users").updateOne(
+    {_id: comment.userId},
+    {$push: {feedback: comment.comment}}
 
- };
+  );
+   return res.status(200).json({status:200, message:"added comment"});
+} catch(error){
+  return res.status(404).json({status:404, error:error.message});
+}finally {
+  client.close()
+}
+
+}
 
 
 
-module.exports = { createUser, signin,  deleteMovie,viewMovies};
+module.exports = { createUser, signin,  deleteMovie,viewMovies,addComment};

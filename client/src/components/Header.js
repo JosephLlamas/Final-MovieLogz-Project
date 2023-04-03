@@ -44,7 +44,7 @@ const Header = () => {
   };
 
  
-console.log(currentUser)
+// console.log(currentUser)
   return (
     <HeaderWrap>
       <Wrapper>
