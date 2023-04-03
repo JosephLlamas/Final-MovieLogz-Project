@@ -3,22 +3,28 @@ import React from "react";
 import Loading from "./Loading";
 import Pagination from "./Pagination";
 import styled from "styled-components";
+import {useNavigate} from "react-router-dom";
+import WatchlistButton from "../components/WishListButton";
 
 const toprated = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 360 / 20;
+  // const totalPages = 360 / 20;
+  const [totalPages, setTotalPages] = useState(0);
   const itemsPerPage = 20;
+  const navigate =useNavigate();
 
   useEffect(() => {
-    fetch("/topRatedMovies")
+    fetch(`/topRatedMovies?page=${currentPage}`)
       .then((response) => response.json())
       .then((data) => {
         setData(data.data.results);
+        setTotalPages(Math.min(Math.ceil(data.data.total_results / itemsPerPage), 20));
         console.log(data);
       })
       .catch((err) => console.error(err));
-  }, []);
+  }, [currentPage]);
+
   //pagination
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -27,26 +33,35 @@ const toprated = () => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const itemsToShow = data.slice(startIndex, endIndex);
-
+  console.log(itemsToShow);
   return (
     <Wrapper>
       <HomePageTextWrap>
-        <HomePageText>All Items</HomePageText>
+        <HomePageText>MAYBE SEARCH BAR FOR MOVIES??INSERT</HomePageText>
       </HomePageTextWrap>
       {data.length === 0 ? (
         <Loading />
       ) : (
         <GridWrap>
           <AllItemGrid>
-            {itemsToShow.map((items) => {
+            {data.map((items) => {
               return (
-                <div key={items.id}>
+                <div>
+                <div key={items.id}
+                onClick={(event)=>{
+                  event.stopPropagation();
+                  navigate(`/movie/${items.id}`);
+                  }}
+                >
+
                   <p>{items.title}</p>
 
                   <Img
                     src={`https://image.tmdb.org/t/p/w500/${items.backdrop_path}`}
                     alt={items.title}
                   />
+                </div>
+                <WatchlistButton item={items}/>
                 </div>
               );
             })}

@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     html {
-        background-color: #B5D2AD;
+        background-color: orange;
     }
 
   

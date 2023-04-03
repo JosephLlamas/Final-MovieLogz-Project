@@ -3,7 +3,9 @@ import { Link,useNavigate } from "react-router-dom";
 import { BsMinecartLoaded } from "react-icons/bs";
 import { UserContext } from "./UserContext";
 import {  useContext } from "react";
-
+import {GoSignOut} from "react-icons/go";
+import { BsFillEmojiSunglassesFill } from "react-icons/bs";
+import { IconName } from "react-icons/bs";
 import React from "react";
 
 
@@ -42,7 +44,7 @@ const Header = () => {
   };
 
  
-console.log(currentUser)
+// console.log(currentUser)
   return (
     <HeaderWrap>
       <Wrapper>
@@ -54,19 +56,19 @@ console.log(currentUser)
         <NavItem className="leftBorder" to={"/topRated"}>
           TopRated
         </NavItem>
-        <NavItem to={"/"}>Popular</NavItem>
+        <NavItem to={"/nowPlaying"}>Now Playing</NavItem>
         <NavItem to={"/backlog"}>BackLog</NavItem>
         {!currentUser?(
         <NavItem to={"/signin"}>Profile</NavItem>
         ) :(
-            <p>{currentUser.firstName}</p>
+            <NavItem to={"/profile"}>{currentUser.firstName}</NavItem>
         )
       }
-      {currentUser? ( <p onClick={handleChange}>sign out</p>):(
+      {currentUser? ( <NavItem onClick={handleChange}><GoSignOut/></NavItem>):(
 
         <ThemeProvider theme={theme}>
           <NavItem to="/createUser" theme={{ border: { cart: "none" } }}>
-            Sign in
+          <BsFillEmojiSunglassesFill/> Sign In
           </NavItem>
         </ThemeProvider>
 

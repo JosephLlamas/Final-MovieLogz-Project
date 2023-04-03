@@ -20,8 +20,9 @@ const popularMovies = async (req, res) => {
     
   };
   try {
+    console.log(`Request URL: ${options.uri}`);
     const response = await request(options)
-    console.log(response);
+    
     const data = JSON.parse(response)
     return res.status(200).json({
       status: 200,

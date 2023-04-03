@@ -13,13 +13,12 @@ const addToWatchList = async(req,res) =>{
   const client = new MongoClient(MONGO_URI, options);
   const watchlist = {
     userId: req.body.userId,
-    watchlistArr: req.body.watchlistArr, 
     actualItem: req.body.actualItem
   }
   try{
     await client.connect();
     const db =client.db("db-name");
-    await db.collection("users").updateOne({_id: watchlist.userId}, {$set:{watchlist:watchlist.watchlistArr}})
+    await db.collection("users").updateOne({_id: watchlist.userId}, {$push: {watchlist:watchlist.actualItem}})
     return res.status(200).json({status:200});
 
   }catch (err) {
@@ -28,7 +27,5 @@ const addToWatchList = async(req,res) =>{
   }
     
 }
-
-
 
 module.exports = {addToWatchList};

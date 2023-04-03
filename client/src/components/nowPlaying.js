@@ -6,28 +6,25 @@ import styled from "styled-components";
 import {useNavigate} from "react-router-dom";
 import WatchlistButton from "../components/WishListButton";
 
-
-const Homepage = () => {
-
+const nowplaying = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   // const totalPages = 360 / 20;
-  // const totalPages = data.total_pages;
   const [totalPages, setTotalPages] = useState(0);
   const itemsPerPage = 20;
-const navigate =useNavigate();
+  const navigate =useNavigate();
 
   useEffect(() => {
-    fetch(`/popularMovies?page=${currentPage}`)
+    fetch(`/NowPlayingMovies?page=${currentPage}`)
       .then((response) => response.json())
       .then((data) => {
         setData(data.data.results);
         setTotalPages(Math.min(Math.ceil(data.data.total_results / itemsPerPage), 20));
-        // setTotalPages(data.total_pages);
         console.log(data);
       })
       .catch((err) => console.error(err));
   }, [currentPage]);
+
   //pagination
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -36,12 +33,11 @@ const navigate =useNavigate();
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const itemsToShow = data.slice(startIndex, endIndex);
-  
-// console.log(itemsToShow);
+  console.log(itemsToShow);
   return (
     <Wrapper>
       <HomePageTextWrap>
-        <HomePageText>MAYBE SEARCH BAR FOR MOVIES??INSERT </HomePageText>
+        <HomePageText>MAYBE SEARCH BAR FOR MOVIES??INSERT</HomePageText>
       </HomePageTextWrap>
       {data.length === 0 ? (
         <Loading />
@@ -53,19 +49,18 @@ const navigate =useNavigate();
                 <div>
                 <div key={items.id}
                 onClick={(event)=>{
-                event.stopPropagation();
-                navigate(`/movie/${items.id}`);
-                }}
+                  event.stopPropagation();
+                  navigate(`/movie/${items.id}`);
+                  }}
                 >
+
                   <p>{items.title}</p>
 
                   <Img
                     src={`https://image.tmdb.org/t/p/w500/${items.backdrop_path}`}
                     alt={items.title}
                   />
-                  
                 </div>
-       
                 <WatchlistButton item={items}/>
                 </div>
               );
@@ -73,20 +68,16 @@ const navigate =useNavigate();
           </AllItemGrid>
         </GridWrap>
       )}
-      
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={handlePageChange}
       />
-      
     </Wrapper>
   );
 };
 
-export default Homepage;
-
-
+export default nowplaying;
 
 const Img = styled.img`
 max-width: 100%;
@@ -94,11 +85,11 @@ max-width: 100%;
   border-radius: 20px;
 
 `;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: orange;
-  
 `;
 const HomePageTextWrap = styled.div`
   display: flex;
@@ -129,3 +120,4 @@ const AllItemGrid = styled.div`
   gap: 2em;
   margin-left: 5em;
 `;
+
