@@ -182,7 +182,7 @@ try{
 const deleteComment =async (req,res) =>{
   const client = new MongoClient(MONGO_URI, options)
   const userId = req.body.userId
-  const commentID = req.body.commentID;
+  const commentID = req.params.id;
 
   try {
       await client.connect()
@@ -190,14 +190,15 @@ const deleteComment =async (req,res) =>{
       const results = await db.collection("users").findOne({ _id: userId, "feedback.commentID":commentID});
       
       console.log(results, "PLEASE HELP")
+
     if (!results) {
       return res
         .status(404)
         .json({ status: 404, message: "comment Item not found" });
     }
 
-      //deletes from comments here 
-      const deleted = await db.collection('users').updateOne({ _id: userId}, {$pull:{feedback:{commentID}}})
+      //deletes comments 
+      const deleted = await db.collection('users').updateOne({ _id: userId}, {$pull: { feedback: { commentID } } })
 
       if(deleted.modifiedCount > 0 ){
           const updatePage = await db.collection("users").findOne({_id: userId})

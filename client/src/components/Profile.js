@@ -95,11 +95,17 @@ const Profile = () => {
         )}
       </div>
       {info.feedback && <div>
-        {info.feedback.map((item)=>{
+        {info.feedback.map((item,index)=>{
           return (
+            <div key={item.commentID}>
+
             <h1>{item.comment}</h1>
+            <button onClick={() => handleDelete(item.commentID)}>DELETE COMMENT</button>
+            </div>
+          
           )
         })}
+        
         </div>}
     </div>
   );
