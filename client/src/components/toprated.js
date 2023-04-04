@@ -5,6 +5,7 @@ import Pagination from "./Pagination";
 import styled,{keyframes} from "styled-components";
 import {useNavigate} from "react-router-dom";
 import WatchlistButton from "../components/WishListButton";
+import { AiTwotoneStar } from "react-icons/ai";
 
 const toprated = () => {
   const [data, setData] = useState([]);
@@ -54,7 +55,7 @@ const toprated = () => {
                 >
                   <Words>
                   <Title>{items.title}</Title>
-                  <p><Rating>RATING:</Rating>{items.vote_average}</p>
+              <p><Rating>RATING:</Rating><Span>{items.vote_average}<AiTwotoneStar/></Span></p>
                   </Words>
                   <Img
                     src={`https://image.tmdb.org/t/p/w500/${items.backdrop_path}`}
@@ -83,6 +84,11 @@ const toprated = () => {
 };
 
 export default toprated;
+
+const Span = styled.span`
+font-size:20px;
+
+`;
 
 const Rating = styled.span`
 font-weight: bold;
@@ -114,6 +120,7 @@ const Container = styled.div`
 display:flex;
 flex-direction:column;
 align-items:center;
+justify-content: center;
 background-color: #800020;
   padding: 20px;
   border-radius: 20px;

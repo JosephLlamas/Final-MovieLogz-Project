@@ -12,7 +12,22 @@ import React from "react";
 
 const Header = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
- 
+  const theme = {
+   
+
+    colors: {
+      primary: "#fff",
+      secondary: "gray",
+    },
+
+    fontSizes: {
+      small: "5px",
+      medium: "30px",
+      large: "100px",
+    },
+
+   
+  };
   
   const navigate = useNavigate();
 
@@ -42,8 +57,8 @@ const Header = () => {
           <NavItem to={"/signin"}>Profile</NavItem>
         ) : (<>
           <NavItem to={"/profile"}>{currentUser.firstName}</NavItem>
-         
-         
+        
+        
           </>
         )}
         {currentUser ? (
@@ -51,7 +66,7 @@ const Header = () => {
             <GoSignOut />
           </NavItem>
         ) : (
-          <ThemeProvider >
+          <ThemeProvider theme={theme} >
             <NavItem to="/createUser">
               <BsFillEmojiSunglassesFill /> Sign up
             </NavItem>
@@ -80,7 +95,7 @@ const NavItem = styled(Link)`
   
   margin: 0px;
   box-sizing: border-box;
-
+  border-right: ${({ theme }) => theme.border || "3px solid black"};
   .leftBorder {
     border-left: 3px solid black;
   }

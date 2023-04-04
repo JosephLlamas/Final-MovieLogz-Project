@@ -91,7 +91,7 @@ const Profile = () => {
               onClick={handleSubmit}
             >
               
-              <Span1>Comment</Span1>
+              <Span1>Notes</Span1>
             </Button1>
           </>
         )}
@@ -197,6 +197,18 @@ width: 604px;
 
 const Button1 = styled.button`
 display:flex;
+font-weight:bold;
+align-items: center;
+  background-color: #fee6e3;
+  border: 2px solid #111;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #111;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  height: 48px;
 
 
 `;
