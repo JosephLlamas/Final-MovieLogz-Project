@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import Loading from "./Loading";
 import Pagination from "./Pagination";
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import {useNavigate} from "react-router-dom";
 import WatchlistButton from "../components/WishListButton";
 
@@ -28,6 +28,7 @@ const navigate =useNavigate();
       })
       .catch((err) => console.error(err));
   }, [currentPage]);
+
   //pagination
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -41,7 +42,7 @@ const navigate =useNavigate();
   return (
     <Wrapper>
       <HomePageTextWrap>
-        <HomePageText>MAYBE SEARCH BAR FOR MOVIES??INSERT </HomePageText>
+        <HomePageText> WELCOME! </HomePageText>
       </HomePageTextWrap>
       {data.length === 0 ? (
         <Loading />
@@ -58,6 +59,7 @@ const navigate =useNavigate();
                 }}
                 >
                   <p>{items.title}</p>
+                  <p>RATING:{items.vote_average}</p>
 
                   <Img
                     src={`https://image.tmdb.org/t/p/w500/${items.backdrop_path}`}
@@ -65,7 +67,7 @@ const navigate =useNavigate();
                   />
                   
                 </div>
-       
+      
                 <WatchlistButton item={items}/>
                 </div>
               );
@@ -86,6 +88,14 @@ const navigate =useNavigate();
 
 export default Homepage;
 
+const slideIn = keyframes`
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+`;
 
 
 const Img = styled.img`
@@ -105,6 +115,14 @@ const HomePageTextWrap = styled.div`
   justify-content: center;
   align-items: center;
   height: 150px;
+
+ 
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: ${slideIn} 1s ease-out forwards;
+
+  z-index: 1; //adjusted
 `;
 
 const HomePageText = styled.h2`

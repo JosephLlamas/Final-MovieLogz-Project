@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import Loading from "./Loading";
 import Pagination from "./Pagination";
-import styled from "styled-components";
+import styled,{keyframes} from "styled-components";
 import {useNavigate} from "react-router-dom";
 import WatchlistButton from "../components/WishListButton";
 
@@ -37,7 +37,7 @@ const toprated = () => {
   return (
     <Wrapper>
       <HomePageTextWrap>
-        <HomePageText>MAYBE SEARCH BAR FOR MOVIES??INSERT</HomePageText>
+      <HomePageText> Welcome!</HomePageText>
       </HomePageTextWrap>
       {data.length === 0 ? (
         <Loading />
@@ -91,11 +91,29 @@ const Wrapper = styled.div`
   flex-direction: column;
   background-color: orange;
 `;
+const slideIn = keyframes`
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+`;
+
+
 const HomePageTextWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 150px;
+
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: ${slideIn} 1s ease-out forwards;
+
+  z-index: 1; //adjusted
+
 `;
 
 const HomePageText = styled.h2`

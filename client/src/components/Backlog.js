@@ -2,6 +2,7 @@ import React from "react";
 import { UserContext } from "./UserContext";
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import Loading from "./Loading";
 
 const Backlog = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
@@ -42,7 +43,7 @@ const Backlog = () => {
   };
 
   if (!info.watchlist) {
-    return <p>Loading</p>;
+    return <Loading/>;
   }
   // console.log(data)
   return (
