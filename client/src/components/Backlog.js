@@ -3,13 +3,15 @@ import { UserContext } from "./UserContext";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Loading from "./Loading";
-import styled from "styled-components";
+import styled,{keyframes} from "styled-components";
 
 
 const Backlog = () => {
   const { currentUser } = useContext(UserContext);
   const [info, setInfo] = useState([]);
   const [refresh, setRefresh] = useState();
+  //change
+  const [clickCount, setClickCount] = useState(0);
 
 
   // const {id} = useParams()
@@ -41,7 +43,7 @@ const Backlog = () => {
     .then((data) => {
 
       setRefresh(data.data)
-
+      setClickCount(clickCount + 1);
     })
   };
 
@@ -51,6 +53,8 @@ const Backlog = () => {
   // console.log(data)
   return (
     <div>
+      {clickCount === 3 && <Banner>Congratulations! I see you love movies, but you seriously need to take a break. </Banner>}
+     
       {info.watchlist.length === 0 ? (
         <h2>
           EMPTY Click <Link to={"/"}>here</Link>{" "}
@@ -93,6 +97,26 @@ const Backlog = () => {
 };
 
 export default Backlog;
+
+const moveLeftToRight = keyframes`
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+`;
+
+const Banner = styled.div`
+  animation: ${moveLeftToRight} 10s linear infinite;
+  background-color: orange;
+  color: #000;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+`;
+
 
 
 const Grid = styled.div`
