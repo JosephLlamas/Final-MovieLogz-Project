@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import React from "react";
 import Loading from "./Loading";
 import Pagination from "./Pagination";
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import {useNavigate} from "react-router-dom";
 import WatchlistButton from "../components/WishListButton";
-
+import { AiTwotoneStar } from "react-icons/ai";
 
 const Homepage = () => {
 
@@ -28,6 +28,7 @@ const navigate =useNavigate();
       })
       .catch((err) => console.error(err));
   }, [currentPage]);
+
   //pagination
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -35,13 +36,13 @@ const navigate =useNavigate();
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const itemsToShow = data.slice(startIndex, endIndex);
+  data.slice(startIndex, endIndex)
   
 // console.log(itemsToShow);
   return (
     <Wrapper>
       <HomePageTextWrap>
-        <HomePageText>MAYBE SEARCH BAR FOR MOVIES??INSERT </HomePageText>
+        <HomePageText> WELCOME! </HomePageText>
       </HomePageTextWrap>
       {data.length === 0 ? (
         <Loading />
@@ -50,24 +51,31 @@ const navigate =useNavigate();
           <AllItemGrid>
             {data.map((items) => {
               return (
-                <div>
+                <Container>
                 <div key={items.id}
                 onClick={(event)=>{
                 event.stopPropagation();
                 navigate(`/movie/${items.id}`);
                 }}
                 >
-                  <p>{items.title}</p>
-
+                  <Words>
+                  <Title>{items.title}</Title>
+                  <p><Rating>RATING:</Rating><Span>{items.vote_average}<AiTwotoneStar/></Span></p>
+                  </Words>
                   <Img
                     src={`https://image.tmdb.org/t/p/w500/${items.backdrop_path}`}
                     alt={items.title}
                   />
                   
+              
                 </div>
-       
+
+                <Backlog>
+                <span>ADD TO BACKLOG</span>
                 <WatchlistButton item={items}/>
-                </div>
+                </Backlog>
+
+                </Container>
               );
             })}
           </AllItemGrid>
@@ -86,12 +94,65 @@ const navigate =useNavigate();
 
 export default Homepage;
 
+const Span = styled.span`
+font-size:20px;
+
+`;
+
+
+const Rating = styled.span`
+font-weight: bold;
+
+`;
+
+
+const Title = styled.p`
+font-weight: bold;
+font-size: 20px;
+`;
+
+
+const Words = styled.div`
+display:flex;
+flex-direction:column;
+align-content:center;
+flex-wrap:wrap;
+gap:20px;
+
+`;
+
+const Backlog = styled.div`
+display:flex;
+font-size:20px;
+
+`;
+
+const Container = styled.div`
+display:flex;
+flex-direction:column;
+align-items:center;
+background-color: #800020;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+`;
+
+const slideIn = keyframes`
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+`;
 
 
 const Img = styled.img`
 max-width: 100%;
   height: auto;
   border-radius: 20px;
+
 
 `;
 const Wrapper = styled.div`
@@ -105,6 +166,14 @@ const HomePageTextWrap = styled.div`
   justify-content: center;
   align-items: center;
   height: 150px;
+
+ 
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: ${slideIn} 1s ease-out forwards;
+
+  z-index: 1; //adjusted
 `;
 
 const HomePageText = styled.h2`

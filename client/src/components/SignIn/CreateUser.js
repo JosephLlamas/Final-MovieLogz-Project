@@ -17,7 +17,7 @@ const CreateUser = () => {
 const navigate =useNavigate();
 const [user, setUser]=useState(createUser);
 const [error, setError] =useState();
-const {currentUser ,setCurrentUser} = useContext(UserContext);
+const {setCurrentUser} = useContext(UserContext);
 
 const handleSubmit = (event) =>{
   event.preventDefault();

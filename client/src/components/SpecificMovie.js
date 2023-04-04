@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import styled from "styled-components";
 import Loading from "./Loading";
 
+
 const SpecificMovie = () => {
   const [movie, setMovie] = useState([]);
   const {movieId} = useParams();
@@ -31,7 +32,7 @@ const SpecificMovie = () => {
             <Date><Label>RELEASE DATE:</Label>{movie.release_date}</Date>
             <Summary><Label>Synopsis:</Label>{movie.overview}</Summary>
             </Description>
-
+          
           </Container>
         )}
     </Wrapper>

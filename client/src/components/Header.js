@@ -1,31 +1,19 @@
-import styled, { ThemeProvider } from "styled-components";
-import { Link,useNavigate } from "react-router-dom";
-import { BsMinecartLoaded } from "react-icons/bs";
-import { UserContext } from "./UserContext";
-import {  useContext } from "react";
-import {GoSignOut} from "react-icons/go";
-import { BsFillEmojiSunglassesFill } from "react-icons/bs";
-import { IconName } from "react-icons/bs";
-import React from "react";
+import styled, { ThemeProvider }  from "styled-components";
 
+import { Link, useNavigate } from "react-router-dom";
+
+import { UserContext } from "./UserContext";
+import { useContext,useEffect,useState } from "react";
+import { GoSignOut } from "react-icons/go";
+import { BsFillEmojiSunglassesFill } from "react-icons/bs";
+
+
+import React from "react";
 
 const Header = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
-
-  const navigate = useNavigate();
-
-  const handleChange = () => {
-    setCurrentUser(null);
-    localStorage.removeItem("user");
-    navigate("/signin");
-  };
-
-
-
   const theme = {
-    border: {
-      cart: "none",
-    },
+   
 
     colors: {
       primary: "#fff",
@@ -38,18 +26,24 @@ const Header = () => {
       large: "100px",
     },
 
-    background: {
-      cart: "black",
-    },
+   
+  };
+  
+  const navigate = useNavigate();
+
+  const handleChange = () => {
+    setCurrentUser(null);
+    localStorage.removeItem("user");
+    navigate("/signin");
   };
 
- 
-// console.log(currentUser)
+  // console.log(currentUser)
   return (
     <HeaderWrap>
       <Wrapper>
         <HomeLink to={"/"}>
           <CompanyName>MovieLogz</CompanyName>
+        
         </HomeLink>
       </Wrapper>
       <NavWrap>
@@ -58,27 +52,31 @@ const Header = () => {
         </NavItem>
         <NavItem to={"/nowPlaying"}>Now Playing</NavItem>
         <NavItem to={"/backlog"}>BackLog</NavItem>
-        {!currentUser?(
-        <NavItem to={"/signin"}>Profile</NavItem>
-        ) :(
-            <NavItem to={"/profile"}>{currentUser.firstName}</NavItem>
-        )
-      }
-      {currentUser? ( <NavItem onClick={handleChange}><GoSignOut/></NavItem>):(
 
-        <ThemeProvider theme={theme}>
-          <NavItem to="/createUser" theme={{ border: { cart: "none" } }}>
-          <BsFillEmojiSunglassesFill/> Sign In
+        {!currentUser ? (
+          <NavItem to={"/signin"}>Profile</NavItem>
+        ) : (<>
+          <NavItem to={"/profile"}>{currentUser.firstName}</NavItem>
+        
+        
+          </>
+        )}
+        {currentUser ? (
+          <NavItem onClick={handleChange}>
+            <GoSignOut />
           </NavItem>
-        </ThemeProvider>
-
-      )}
+        ) : (
+          <ThemeProvider theme={theme} >
+            <NavItem to="/createUser">
+              <BsFillEmojiSunglassesFill /> Sign up
+            </NavItem>
+          </ThemeProvider>
+        )}
       </NavWrap>
     </HeaderWrap>
-
-
   );
 };
+
 
 
 
@@ -87,8 +85,6 @@ const HomeLink = styled(Link)`
   color: black;
 `;
 
-const Cart = styled(BsMinecartLoaded)``;
-
 const NavItem = styled(Link)`
   padding: 20px 80px;
   text-decoration: none;
@@ -96,10 +92,10 @@ const NavItem = styled(Link)`
   font-weight: 700;
   color: black;
   font-size: 25px;
-  border-right: ${({ theme }) => theme.border || "3px solid black"};
+  
   margin: 0px;
   box-sizing: border-box;
-
+  border-right: ${({ theme }) => theme.border || "3px solid black"};
   .leftBorder {
     border-left: 3px solid black;
   }
@@ -118,7 +114,7 @@ const NavWrap = styled.div`
   justify-content: center;
   border-bottom: 5px solid black;
   margin: 0px;
-  background-color: red;
+  background-color: #800020;
 `;
 
 const Wrapper = styled.div`
