@@ -210,10 +210,5 @@ align-items: center;
   font-size: 16px;
   height: 48px;
 
-
 `;
 
-const Button2 = styled.button`
-display:flex;
-
-`;

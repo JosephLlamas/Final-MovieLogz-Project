@@ -7,7 +7,7 @@ import styled from "styled-components";
 
 
 const Backlog = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   const [info, setInfo] = useState([]);
   const [refresh, setRefresh] = useState();
 
