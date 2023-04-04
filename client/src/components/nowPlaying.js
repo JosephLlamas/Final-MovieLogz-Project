@@ -46,23 +46,29 @@ const nowplaying = () => {
           <AllItemGrid>
             {data.map((items) => {
               return (
-                <div>
+                <Container>
                 <div key={items.id}
                 onClick={(event)=>{
                   event.stopPropagation();
                   navigate(`/movie/${items.id}`);
                   }}
                 >
-
-                  <p>{items.title}</p>
-
+                  <Words>
+                  <Title>{items.title}</Title>
+                  <p><Rating>RATING:</Rating>{items.vote_average}</p>
+                  </Words>
                   <Img
                     src={`https://image.tmdb.org/t/p/w500/${items.backdrop_path}`}
                     alt={items.title}
                   />
                 </div>
+
+                <Backlog>
+                <span>ADD TO BACKLOG</span>
                 <WatchlistButton item={items}/>
-                </div>
+                </Backlog>
+
+                </Container>
               );
             })}
           </AllItemGrid>
@@ -78,6 +84,45 @@ const nowplaying = () => {
 };
 
 export default nowplaying;
+
+const Rating = styled.span`
+font-weight: bold;
+
+`;
+
+
+const Title = styled.p`
+font-weight: bold;
+font-size: 20px;
+`;
+
+
+const Words = styled.div`
+display:flex;
+flex-direction:column;
+align-content:center;
+flex-wrap:wrap;
+gap:20px;
+
+`;
+
+const Backlog = styled.div`
+display:flex;
+font-size:20px;
+
+`;
+
+const Container = styled.div`
+display:flex;
+flex-direction:column;
+align-items:center;
+background-color: #800020;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+`;
+
 
 const Img = styled.img`
 max-width: 100%;

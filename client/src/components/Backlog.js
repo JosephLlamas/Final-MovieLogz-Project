@@ -1,13 +1,16 @@
 import React from "react";
 import { UserContext } from "./UserContext";
 import { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Loading from "./Loading";
+import styled from "styled-components";
+
 
 const Backlog = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [info, setInfo] = useState([]);
   const [refresh, setRefresh] = useState();
+
 
   // const {id} = useParams()
 
@@ -20,7 +23,6 @@ const Backlog = () => {
       })
       .catch((err) => console.error(err));
   }, [refresh]);
-
 
 
   const handleClickButtonDelete = (id) => {
@@ -39,6 +41,7 @@ const Backlog = () => {
     .then((data) => {
 
       setRefresh(data.data)
+
     })
   };
 
@@ -58,18 +61,21 @@ const Backlog = () => {
             return (
               <div key={item.id}>
                 <h1>{item.title}</h1>
-                <h1>{item.id}</h1>
+                
                 <img
                   src={`https://image.tmdb.org/t/p/w500/${item.backdrop_path}`}
                   alt={item.title || 'Movie Poster'}
                 />
               
-              <button onClick={() => handleClickButtonDelete(item.id)}>
+              <button onClick={() => {handleClickButtonDelete(item.id)}}>
+
                 DONE WATCHING
               </button>
               </div>
             );
           })}
+
+
         </>
       )}
     </div>
