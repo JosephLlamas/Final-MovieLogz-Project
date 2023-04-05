@@ -8,7 +8,7 @@ const options = {
   useUnifiedTopology: true,
 };
 //Add to watchlist
-const addToWatchList = async(req,res) =>{
+const addToBacklog = async(req,res) =>{
   const client = new MongoClient(MONGO_URI, options);
   const watchlist = {
     userId: req.body.userId,
@@ -27,4 +27,4 @@ const addToWatchList = async(req,res) =>{
     
 }
 
-module.exports = {addToWatchList};
+module.exports = {addToBacklog};

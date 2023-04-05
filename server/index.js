@@ -8,7 +8,7 @@ const { TopRatedMovies } = require("./handlers/TopRatedMovies");
 const { NowPlaying } = require("./handlers/NowPlaying");
 const {createUser,signin,deleteMovie,viewMovies,addComment,deleteComment,viewComments} = require("./handlers/MongoHandlers")
 const { getMovieById } = require("./handlers/MoviebyId");
-const { addToWatchList } = require("./handlers/WishlistButton");
+const { addToBacklog } = require("./handlers/WishlistButton");
 
 const PORT = 4000;
 
@@ -40,7 +40,7 @@ express()
 .get("/signIn/:email/:password", signin)
 
 //adding to watchlist , retrieve from watchlist 
-.post("/watchlist", addToWatchList)
+.post("/watchlist", addToBacklog)
 .get("/viewWatchlist/:userId", viewMovies)
 
 //delete Movie ID from watchlist
