@@ -6,7 +6,7 @@ import styled, {keyframes} from "styled-components"
 import { CiCircleRemove } from "react-icons/ci";
 
 const Profile = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   const [characterLimit, setCharacterLimit] = useState(20);
   const [text, SetText] = useState("");
   const [refresh, setRefresh] = useState(false);
