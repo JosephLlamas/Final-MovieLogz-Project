@@ -39,25 +39,21 @@ express()
 .post("/addUser", createUser)
 .get("/signIn/:email/:password", signin)
 
-//adding to watchlist
+//adding to watchlist , retrieve from watchlist 
 .post("/watchlist", addToWatchList)
+.get("/viewWatchlist/:userId", viewMovies)
+
 //delete Movie ID from watchlist
 .delete("/deleteMovie/:id", deleteMovie)
 
-// get movie watchlists
-.get("/viewWatchlist/:userId", viewMovies)
 
-
-
-//post comment
+//post commentand and view comments
 .post("/comment",addComment)
-
+.get("/getComments/:userId", viewComments)
 
 //delete comment
 .delete("/deleteComment/:id", deleteComment)
 
-//view comments
-.get("/getComments/:userId", viewComments)
 
 //Error message
 .get("*", (req, res) => {

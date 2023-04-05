@@ -14,7 +14,7 @@ const SpecificMovie = () => {
       .then((response) => response.json())
       .then((data) => {
         setMovie(data.data);
-        console.log(data);
+        
       })
       .catch((err) => console.error(err));
   }, []);

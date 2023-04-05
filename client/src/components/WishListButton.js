@@ -1,13 +1,13 @@
 import { AiTwotoneFire } from "react-icons/ai";
 import React from "react";
 import {useState, useContext} from "react";
-import styled from "styled-components";
+
 import { UserContext } from "./UserContext";
 
 const WatchlistButton = ({item}) => {
   const {currentUser, setCurrentUser} = useContext(UserContext);
   const [message, setMessage] = useState("");
-console.log(currentUser)
+
   const handleClick = (user_id, item) => {
     const itemArr = [...currentUser.watchlist];
     itemArr.push(item);

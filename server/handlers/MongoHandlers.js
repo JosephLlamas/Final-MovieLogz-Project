@@ -73,7 +73,7 @@ const signin = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   const userEmail = req.params.email;
   const userPassword = req.params.password;
-  console.log(req.params)
+  
   try {
     await client.connect();
     const db = client.db("db-name");
@@ -99,23 +99,18 @@ const signin = async (req, res) => {
 const deleteMovie =async (req,res) =>{
   const client = new MongoClient(MONGO_URI, options)
   const userId = req.body.userId
-  // console.log(userId)
+  
   const watchlistId = Number(req.params.id)
-  console.log(watchlistId)
-  // console.log(typeof watchlistId)
 
   try {
       await client.connect()
       const db = client.db("db-name")
       const results = await db.collection("users").findOne({ _id: userId, watchlist: {$elemMatch: {id: watchlistId} }});
-      // const reservation = await db.collection("users").findOne({_id: "INSERT _ID", "watchlist.id": watchlistId});
-      // console.log(results, "PLEASE HELP")
     if (!results) {
       return res
         .status(404)
         .json({ status: 404, message: "Watchlist Item not found" });
     }
-
 
       //deletes from watchlist here 
       const deleted = await db.collection('users').updateOne({ _id: userId}, {$pull: {watchlist: {id: watchlistId}}})
@@ -132,18 +127,16 @@ const deleteMovie =async (req,res) =>{
 };
 
 
-
-
  //get all movies from watchlist 
   const  viewMovies = async (req,res) =>{
   const userId =req.params.userId 
   const client = new MongoClient(MONGO_URI,options);
-// console.log(userId)
+
   try{
     await client.connect();
     const db = client.db("db-name");
     const result= await db.collection("users").findOne({_id: userId});
-    // console.log(result)
+   
     res.status(200).json({status:200, data:result});
   }catch (err){
     console.log(err.stack);
@@ -173,7 +166,7 @@ try{
     {$push: {feedback: comment}}
 
   );
-  console.log(result)
+  
    return res.status(200).json({status:200, message:"added comment"});
 } catch(error){
   return res.status(404).json({status:404, error:error.message});
@@ -193,8 +186,6 @@ const deleteComment =async (req,res) =>{
       const db = client.db("db-name")
       const results = await db.collection("users").findOne({ _id: userId, "feedback.commentID":commentID});
       
-      console.log(results, "PLEASE HELP")
-
     if (!results) {
       return res
         .status(404)
@@ -219,12 +210,11 @@ const deleteComment =async (req,res) =>{
 const  viewComments = async (req,res) =>{
   const userId =req.params.userId 
   const client = new MongoClient(MONGO_URI,options);
-// console.log(userId)
+
   try{
     await client.connect();
     const db = client.db("db-name");
     const result= await db.collection("users").findOne({_id: userId});
-    console.log(result)
     res.status(200).json({status:200, data:result});
   }catch (err){
     console.log(err.stack);
@@ -235,8 +225,6 @@ const  viewComments = async (req,res) =>{
   }
 
 };
-
-
 
 
 module.exports = { createUser, signin,  deleteMovie,viewMovies,addComment,deleteComment,viewComments};

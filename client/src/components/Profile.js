@@ -48,13 +48,13 @@ const Profile = () => {
       .then((response) => response.json())
       .then((data) => {
         setInfo(data.data);
-        console.log(data.data.feedback);
+        
       })
       .catch((err) => console.error(err));
   }, [refresh]);
 
   const handleDelete = (id) => {
-    // alert(id);
+    
     fetch(`/deleteComment/${id}`, {
       method: "DELETE",
       headers: {
@@ -75,7 +75,7 @@ const Profile = () => {
     <Wrapper>
       <Container>
         {!currentUser ? (
-          <h1>EMPTY Click <Link to={"/"}>here</Link>{" "}</h1>
+          <h1> Click <Link to={"/"}>here</Link>{" "} to return to homepage</h1>
         ) : (
           <>
             <TextArea
@@ -85,7 +85,7 @@ const Profile = () => {
               value={text}
               onChange={handleChange}
             ></TextArea>
-            {/* <div value={characterLimit}>{characterLimit}</div> */}
+            
             <Button1
               disabled={characterLimit < 0 || characterLimit === 280}
               onClick={handleSubmit}
@@ -173,7 +173,7 @@ padding-top:50px;
   transform: translate(-50%, -50%);
   animation: ${slideIn} 1s ease-out forwards;
 
-  z-index: 1; //adjusted
+  z-index: 1; 
 
  
 `;

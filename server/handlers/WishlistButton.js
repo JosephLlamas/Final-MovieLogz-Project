@@ -1,5 +1,4 @@
 const { MongoClient } = require("mongodb");
-const { v4: uuidv4 } = require("uuid");
 require("dotenv").config();
 
 const { MONGO_URI } = process.env;
@@ -8,7 +7,7 @@ const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
-
+//Add to watchlist
 const addToWatchList = async(req,res) =>{
   const client = new MongoClient(MONGO_URI, options);
   const watchlist = {

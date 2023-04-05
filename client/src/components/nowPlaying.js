@@ -21,7 +21,7 @@ const nowplaying = () => {
       .then((data) => {
         setData(data.data.results);
         setTotalPages(Math.min(Math.ceil(data.data.total_results / itemsPerPage), 20));
-        console.log(data);
+        
       })
       .catch((err) => console.error(err));
   }, [currentPage]);
@@ -33,8 +33,8 @@ const nowplaying = () => {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const itemsToShow = data.slice(startIndex, endIndex);
-  console.log(itemsToShow);
+  data.slice(startIndex, endIndex);
+  
   return (
     <Wrapper>
       <HomePageTextWrap>
@@ -164,7 +164,7 @@ const HomePageTextWrap = styled.div`
   transform: translate(-50%, -50%);
   animation: ${slideIn} 1s ease-out forwards;
 
-  z-index: 1; //adjusted
+  z-index: 1; 
 
 `;
 
