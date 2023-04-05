@@ -184,6 +184,7 @@ const GridWrap = styled.div`
 `;
 
 const AllItemGrid = styled.div`
+  margin-right: 100px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
