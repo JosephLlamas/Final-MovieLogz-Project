@@ -96,13 +96,10 @@ export default Homepage;
 
 const Span = styled.span`
 font-size:20px;
-
 `;
-
 
 const Rating = styled.span`
 font-weight: bold;
-
 `;
 
 
@@ -110,7 +107,6 @@ const Title = styled.p`
 font-weight: bold;
 font-size: 20px;
 `;
-
 
 const Words = styled.div`
 display:flex;
@@ -173,7 +169,7 @@ const HomePageTextWrap = styled.div`
   transform: translate(-50%, -50%);
   animation: ${slideIn} 1s ease-out forwards;
 
-  z-index: 1; //adjusted
+  z-index: 1; 
 `;
 
 const HomePageText = styled.h2`
@@ -185,6 +181,7 @@ const HomePageText = styled.h2`
   font-style: normal;
 `;
 const GridWrap = styled.div`
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -192,6 +189,7 @@ const GridWrap = styled.div`
 `;
 
 const AllItemGrid = styled.div`
+margin-right: 100px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
