@@ -3,7 +3,7 @@ import styled, { ThemeProvider }  from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 
 import { UserContext } from "./UserContext";
-import { useContext,useEffect,useState } from "react";
+import { useContext } from "react";
 import { GoSignOut } from "react-icons/go";
 import { BsFillEmojiSunglassesFill } from "react-icons/bs";
 

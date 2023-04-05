@@ -10,11 +10,10 @@ const Backlog = () => {
   const { currentUser } = useContext(UserContext);
   const [info, setInfo] = useState([]);
   const [refresh, setRefresh] = useState();
-  //change
+ 
   const [clickCount, setClickCount] = useState(0);
 
 
-  // const {id} = useParams()
 
   useEffect(() => {
     fetch(`/viewWatchlist/${currentUser._id}`)
@@ -50,15 +49,17 @@ const Backlog = () => {
   if (!info.watchlist) {
     return <Loading/>;
   }
-  // console.log(data)
+ 
   return (
     <div>
       {clickCount === 3 && <Banner>Congratulations! I see you love movies, but you seriously need to take a break. </Banner>}
-     
+      {clickCount === 2 && <Banner>Keep up the great work! </Banner>}
       {info.watchlist.length === 0 ? (
-        <h2>
-          EMPTY Click <Link to={"/"}>here</Link>{" "}
-        </h2>
+
+        <H2>
+
+          Click   <Link to={"/"}>here</Link>{" "} for more Movies!
+        </H2>
       ) : (
         <>
         <Grid>
@@ -67,9 +68,7 @@ const Backlog = () => {
               <Container>
               <Content key={item.id}>
 
-                
-
-
+              
                 <Img
                   src={`https://image.tmdb.org/t/p/w500/${item.backdrop_path}`}
                   alt={item.title || 'Movie Poster'}
@@ -98,6 +97,14 @@ const Backlog = () => {
 
 export default Backlog;
 
+const H2= styled.h2`
+text-align:center;
+font-size:20px;
+font-weight:bold;
+padding-top: 50px;
+`;
+
+
 const moveLeftToRight = keyframes`
   0% { transform: translateX(100%); }
   100% { transform: translateX(-100%); }
@@ -120,6 +127,7 @@ const Banner = styled.div`
 
 
 const Grid = styled.div`
+padding-top:20px;
 display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
