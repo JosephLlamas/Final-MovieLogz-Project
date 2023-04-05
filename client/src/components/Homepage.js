@@ -11,8 +11,7 @@ const Homepage = () => {
 
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  // const totalPages = 360 / 20;
-  // const totalPages = data.total_pages;
+  
   const [totalPages, setTotalPages] = useState(0);
   const itemsPerPage = 20;
 const navigate =useNavigate();
