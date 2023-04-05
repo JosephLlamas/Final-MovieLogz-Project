@@ -1,20 +1,15 @@
-import styled, { ThemeProvider }  from "styled-components";
-
+import styled, { ThemeProvider } from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-
 import { UserContext } from "./UserContext";
 import { useContext } from "react";
 import { GoSignOut } from "react-icons/go";
 import { BsFillEmojiSunglassesFill } from "react-icons/bs";
-
 
 import React from "react";
 
 const Header = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const theme = {
-   
-
     colors: {
       primary: "#fff",
       secondary: "gray",
@@ -25,10 +20,8 @@ const Header = () => {
       medium: "30px",
       large: "100px",
     },
-
-   
   };
-  
+
   const navigate = useNavigate();
 
   const handleChange = () => {
@@ -37,13 +30,12 @@ const Header = () => {
     navigate("/signin");
   };
 
-  // console.log(currentUser)
+  
   return (
     <HeaderWrap>
       <Wrapper>
         <HomeLink to={"/"}>
           <CompanyName>MovieLogz</CompanyName>
-        
         </HomeLink>
       </Wrapper>
       <NavWrap>
@@ -55,10 +47,9 @@ const Header = () => {
 
         {!currentUser ? (
           <NavItem to={"/signin"}>Profile</NavItem>
-        ) : (<>
-          <NavItem to={"/profile"}>{currentUser.firstName}</NavItem>
-        
-        
+        ) : (
+          <>
+            <NavItem to={"/profile"}>{currentUser.firstName}</NavItem>
           </>
         )}
         {currentUser ? (
@@ -66,7 +57,7 @@ const Header = () => {
             <GoSignOut />
           </NavItem>
         ) : (
-          <ThemeProvider theme={theme} >
+          <ThemeProvider theme={theme}>
             <NavItem to="/createUser">
               <BsFillEmojiSunglassesFill /> Sign up
             </NavItem>
@@ -76,9 +67,6 @@ const Header = () => {
     </HeaderWrap>
   );
 };
-
-
-
 
 const HomeLink = styled(Link)`
   text-decoration: none;
@@ -92,7 +80,7 @@ const NavItem = styled(Link)`
   font-weight: 700;
   color: black;
   font-size: 25px;
-  
+
   margin: 0px;
   box-sizing: border-box;
   border-right: ${({ theme }) => theme.border || "3px solid black"};

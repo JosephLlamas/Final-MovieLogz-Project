@@ -25,7 +25,6 @@ const SigninPage = () => {
         } else {
           localStorage.setItem("user", JSON.stringify(data.data));
           setCurrentUser(data.data);
-          console.log(currentUser);
           navigate("/");
         }
       })
