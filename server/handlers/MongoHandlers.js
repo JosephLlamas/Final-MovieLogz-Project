@@ -1,6 +1,8 @@
 const { MongoClient } = require("mongodb");
 const { v4: uuidv4 } = require("uuid");
 require("dotenv").config();
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const { MONGO_URI } = process.env;
 
@@ -42,12 +44,14 @@ const createUser = async (req, res) => {
       throw new Error(failure.error);
     } else {
       const ID= uuidv4();
+      const salt = await bcrypt.genSalt(saltRounds);
+      const hash = await bcrypt.hash(userInfo.password, salt);
       const user = {
         _id: ID,
         email: userInfo.email,
         firstName: userInfo.firstName,
         lastName: userInfo.lastName,
-        password: userInfo.password,
+        password: hash,
         userType: 1,
         watchlist: [],
       };
