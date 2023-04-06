@@ -8,23 +8,26 @@ const options = {
   useUnifiedTopology: true,
 };
 //Add to watchlist
-const addToBacklog = async(req,res) =>{
+const addToBacklog = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   const watchlist = {
     userId: req.body.userId,
-    actualItem: req.body.actualItem
-  }
-  try{
+    actualItem: req.body.actualItem,
+  };
+  try {
     await client.connect();
-    const db =client.db("db-name");
-    await db.collection("users").updateOne({_id: watchlist.userId}, {$push: {watchlist:watchlist.actualItem}})
-    return res.status(200).json({status:200});
-
-  }catch (err) {
+    const db = client.db("db-name");
+    await db
+      .collection("users")
+      .updateOne(
+        { _id: watchlist.userId },
+        { $push: { watchlist: watchlist.actualItem } }
+      );
+    return res.status(200).json({ status: 200 });
+  } catch (err) {
     client.close();
-    return res.status(404).json({status:404, error:err.message});
+    return res.status(404).json({ status: 404, error: err.message });
   }
-    
-}
+};
 
-module.exports = {addToBacklog};
+module.exports = { addToBacklog };

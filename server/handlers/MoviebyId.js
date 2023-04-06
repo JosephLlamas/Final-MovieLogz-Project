@@ -4,32 +4,28 @@ const movieAPI = process.env.MOVIE_API;
 
 //GET MOVIE
 const getMovieById = async (req, res) => {
-  const {movieId} = req.params;
+  const { movieId } = req.params;
   const options = {
     uri: `https://api.themoviedb.org/3/movie/${movieId}?api_key=${movieAPI}&language=en-US`,
     headers: {
-        Accept: "application/json",
+      Accept: "application/json",
     },
-    
   };
   try {
-    const response = await request(options)
-    
-    const data = JSON.parse(response)
+    const response = await request(options);
+
+    const data = JSON.parse(response);
     return res.status(200).json({
       status: 200,
       data: data,
     });
   } catch (err) {
-    console.log(err)
+    console.log(err);
     return res.status(500).json({
       status: 500,
       err,
     });
   }
-}; 
-
-
-
+};
 
 module.exports = { getMovieById };
