@@ -15,6 +15,8 @@ const Homepage = () => {
   const itemsPerPage = 20;
   const navigate = useNavigate();
 
+  
+
   useEffect(() => {
     fetch(`/popularMovies?page=${currentPage}`)
       .then((response) => response.json())
@@ -60,7 +62,8 @@ const Homepage = () => {
                       <Title>{items.title}</Title>
                       <p>
                         <Rating>RATING:</Rating>
-                        <Span>
+                        <Span              
+                        >
                           {items.vote_average}
                           <AiTwotoneStar />
                         </Span>
