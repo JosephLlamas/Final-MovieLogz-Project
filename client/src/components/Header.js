@@ -100,13 +100,13 @@ const NavWrap = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
-  border-bottom: 5px solid black;
+  border: 5px solid black;
+  border-radius:30px;
   margin: 0px;
   background-color: #800020;
 `;
 
 const Wrapper = styled.div`
-  border-bottom: 5px solid black;
   width: 100%;
   display: flex;
   justify-content: center;
