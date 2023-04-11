@@ -47,8 +47,10 @@ const nowplaying = () => {
           <AllItemGrid>
             {data.map((items) => {
               return (
-                <Container>
-                <div key={items.id}
+                <Container
+                key={items.id}
+                >
+                <div 
                 onClick={(event)=>{
                   event.stopPropagation();
                   navigate(`/movie/${items.id}`);

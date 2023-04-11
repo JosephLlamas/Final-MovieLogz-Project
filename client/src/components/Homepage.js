@@ -48,9 +48,10 @@ const Homepage = () => {
           <AllItemGrid>
             {data.map((items) => {
               return (
-                <Container>
+                <Container
+                key={items.id}>
                   <div
-                    key={items.id}
+                    // key={items.id}
                     onClick={(event) => {
                       event.stopPropagation();
                       navigate(`/movie/${items.id}`);

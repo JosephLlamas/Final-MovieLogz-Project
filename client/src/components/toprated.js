@@ -47,9 +47,10 @@ const toprated = () => {
           <AllItemGrid>
             {data.map((items) => {
               return (
-                <Container>
+                <Container
+                key={items.id}
+                >
                   <div
-                    key={items.id}
                     onClick={(event) => {
                       event.stopPropagation();
                       navigate(`/movie/${items.id}`);
