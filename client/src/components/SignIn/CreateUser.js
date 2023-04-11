@@ -95,11 +95,19 @@ const CreateUser = () => {
         />
         <Button type="submit"> createUser</Button>
       </Form>
+      <Error>
+        {error === undefined ? null : <p style={{ color: "red" }}>{error}</p>}
+      </Error>
     </Wrapper>
   );
 };
 
 export default CreateUser;
+const Error = styled.p`
+  position: fixed;
+  top: 70%;
+  left: 50%;
+`;
 
 const Form = styled.form`
   margin-top: 50px;

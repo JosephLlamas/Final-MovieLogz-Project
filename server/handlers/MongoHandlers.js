@@ -167,10 +167,9 @@ const addComment = async (req, res) => {
     await client.connect();
     const db = client.db("db-name");
 
-    await db.collection("users").updateOne(
-      { _id: comment.userId },
-      { $push: { feedback: comment } }
-    );
+    await db
+      .collection("users")
+      .updateOne({ _id: comment.userId }, { $push: { feedback: comment } });
 
     return res.status(200).json({ status: 200, message: "added comment" });
   } catch (error) {
