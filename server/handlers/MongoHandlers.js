@@ -81,7 +81,8 @@ const signin = async (req, res) => {
     if (user === null) {
       throw new Error("No account Found");
     }
-    if (user.password !== userPassword) {
+    const copy = await bcrypt.compare(userPassword,user.password);
+    if (!copy) {
       throw new Error("Wrong Password");
     }
     client.close();

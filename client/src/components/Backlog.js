@@ -60,8 +60,10 @@ const Backlog = () => {
           <Grid>
             {info.watchlist.map((item) => {
               return (
-                <Container>
-                  <Content key={item.id}>
+                <Container
+                key={item.id}
+                >
+                  <Content >
                     <Img
                       src={`https://image.tmdb.org/t/p/w500/${item.backdrop_path}`}
                       alt={item.title || "Movie Poster"}
