@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { FiLoader } from "react-icons/fi";
 import React from "react";
-//ANIMATED SPINNER FOR LOADING STATE
+
 const Loading = () => {
   return (
     <LoadWrapper>

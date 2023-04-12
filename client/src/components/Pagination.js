@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-//COMPONENET FOR IMPLEMENTING PAGES AT BOTTOM OF PAGE
+
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const pageNumbers = [];
